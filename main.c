@@ -1,8 +1,7 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
-enum Rank getRank(int n);
-enum Suit getSuit(int n);
-
+//Declaring structs and enums
 enum Suit{
     Clubs,
     Diamonds,
@@ -25,25 +24,55 @@ enum Rank{
     Queen,
     King,
 };
-
 struct Card{
         enum Suit suit;
         enum Rank rank;
     };
 
+//Declaring Functions
+enum Rank intToRank(int n);
+enum Suit intToSuit(int n);
+void printCard(struct Card c);
+char getRank(struct Card c);
+char getSuit(struct Card c);
+void playerIsDealer();
+void playerIsPone();
+
+// The Deck
+struct Card deck[52];
+
+
+
+
 int main() {
     //Making Deck
-    struct Card deck[52];
+
     for (int i = 0; i < 52; ++i) {
-        deck[i].rank = getRank(i%13);
-        deck[i].suit = getSuit(i/13);
+        deck[i].rank = intToRank(i%13);
+        deck[i].suit = intToSuit(i/13);
     }
-    for (int i = 0; i < 52; ++i) {
-        printf("The suit is %d, and the rank is %d\n", deck[i].rank, deck[i].suit);
+    if(rand()%1 == 1){
+        playerIsDealer();
     }
+    else playerIsPone();
 }
 
-enum Rank getRank(int n){
+
+void playerIsDealer(){
+
+}
+
+void playerIsPone(){}
+
+
+
+
+
+
+
+
+//Card Functions
+enum Rank intToRank(int n){
     switch (n) {
         
         case 0:
@@ -74,7 +103,7 @@ enum Rank getRank(int n){
             return King;
     }
 }
-enum Suit getSuit(int n){
+enum Suit intToSuit(int n){
     switch(n){
         case 0:
             return Clubs;
@@ -86,3 +115,53 @@ enum Suit getSuit(int n){
             return Spades;
     }
 }
+void printCard(struct Card c) {
+    printf("%c%c", getRank(c), getSuit(c));
+}
+char getRank(struct Card c) {
+    switch (c.rank) {
+        case Ace:
+            return 'A';
+        case Two:
+            return '2';
+        case Three:
+            return '3';
+        case Four:
+            return '4';
+        case Five:
+            return '5';
+        case Six:
+            return '6';
+        case Seven:
+            return '7';
+        case Eight:
+            return '8';
+        case Nine:
+            return '9';
+        case Ten:
+            return 'T';
+        case Jack:
+            return 'J';
+        case Queen:
+            return 'Q';
+        case King:
+            return 'K';
+    }
+}
+char getSuit(struct Card c){
+    switch(c.suit){
+        case Clubs:
+            return 'C';
+        case Diamonds:
+            return 'D';
+        case Hearts:
+            return 'H';
+        case Spades:
+            return 'S';
+
+    }
+}
+
+
+
+
